@@ -1,0 +1,11 @@
+<view class="rollListItem">
+  <view class="rollMsg">
+    <view class="iconfont {{icon}}"></view>
+    <text class="rollName">{{rollName}}</text>
+  </view>
+  <view class="rollButton">
+    <view class="btnItem {{arrive}}">已到</view>
+    <view class="btnItem {{notArrive}}">未到</view>
+    <view class="btnItem {{leave}}">请假</view>
+  </view>
+</view>

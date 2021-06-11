@@ -1,0 +1,10 @@
+<!--pages/login/login.wxml-->
+<view class="loginContainer">
+  <view class="logo">
+    <view class="logo-img">
+        <view class="iconfont icon-qiandao3"></view>
+    </view>
+    <text>点个小到</text>
+  </view>
+  <button>立即登录</button>
+</view>

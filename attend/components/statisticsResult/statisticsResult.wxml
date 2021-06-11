@@ -1,0 +1,52 @@
+<!--components/statisticsResult/statisticsResult.wxml-->
+<view class="checkContainer">
+  <!-- 头部 -->
+  <view class="checkHeader">
+    <text class="des">日结</text>
+    <view class="rollTime">
+      <text class="ymd">2020.04.22</text>
+      <text class="iconfont icon-rili2"></text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="checkCount">
+    <!-- 总人数 -->
+    <view class="checkCountItem">
+      <text class="num totalNum">02</text>
+      <text>点到次数</text>
+    </view>
+    <!-- 未到人数 -->
+    <view class="checkCountItem">
+      <text class="num noArriveNum">03</text>
+      <text>未到人次</text>
+    </view>
+    <!-- 请假人数 -->
+    <view class="checkCountItem qj">
+      <text class="num leaveNum">02</text>
+      <text>请假人次</text>
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="checkMain">
+    <table 
+      class="table" 
+      columns="{{tableColumns}}" 
+      dataList="{{dataList}}" 
+      getListLoading="{{getListLoading}}" 
+      showTipImage="{{dataList.length===0&!getListLoading}}" bindclicklistitem="handleClickItem" />
+  </view>
+
+  <!-- 全勤 -->
+  <!-- <view class="fullAttendance">
+    <text>今日全勤哟~</text>
+    <view class="iconfont icon-xiaolian"></view>
+  </view> -->
+
+  <!-- 保存按钮 -->
+  <view class="btnBox">
+    <view class="btn">打印结果</view>
+    <view class="btn">保存并返回</view>
+  </view>
+</view>

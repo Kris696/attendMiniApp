@@ -1,0 +1,34 @@
+/* components/index/index.wxss *//* pages/index/index.wxss */
+.indexContainer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* 头部 */
+.indexBanner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 314rpx;
+  background-color: #03a9f4;
+}
+
+.indexBanner .img{
+  width: 224rpx;
+  height: 224rpx;
+  margin-right: 20rpx;
+}
+
+.words{
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 40rpx;
+  color: #fff;
+}
+
+.words .text1{
+  font-weight: 800;
+}
+

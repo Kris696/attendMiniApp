@@ -1,0 +1,42 @@
+<!-- 点名页面 -->
+<view class="rollCallContainer" style="">
+  <!-- 点名时间 -->
+  <view class="rollCallTime">
+    <text>时间</text>
+    <view class="time">
+      <view class="hms">{{time[0]}}</view>
+      <view class="ma">{{time[1]<12?'早上':'下午'}}</view>
+    </view>
+  </view>
+
+  <!-- 人员名单 -->
+  <view class="rollList">
+    <rollListItem 
+    rollName="赵小明" 
+    icon="icon-chahao" 
+    arrive=""
+    notArrive="notArrive"
+    ></rollListItem>
+    
+    <!-- <rollListItem 
+    rollName="赵小明" 
+    icon="icon-chahao" 
+    arrive=""
+    notArrive="notArrive"
+    ></rollListItem> -->
+
+  </view>
+
+  <!-- 底部 -->
+  <view class="rollCallBottom">
+    <view class="arr preArr">
+      <view class="iconfont"></view>
+      <text>上一页</text>
+    </view>
+    <view class="arr nextArr">
+      <view class="iconfont"></view>
+      <text>下一页</text>
+      <!-- <text>查看结果</text> -->
+    </view>
+  </view>
+</view>

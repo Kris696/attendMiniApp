@@ -1,0 +1,116 @@
+<!--pages/check/check.wxml-->
+<view class="checkContainer">
+  <!-- 头部 -->
+  <view class="checkHeader">
+    <text class="des">本次点到结果</text>
+    <view class="rollTime">
+      <text class="ymd">2020.04.22</text>
+      <text class="ma">早上</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="checkCount">
+    <!-- 总人数 -->
+    <view>
+      <text class="num totalNum">70</text>
+      <text>总人数</text>
+    </view>
+    <!-- 已到人数 -->
+    <view>
+      <text class="num alreadyNum">65</text>
+      <text>已到人数</text>
+    </view>
+    <!-- 未到人数 -->
+    <view>
+      <text class="num noArriveNum">03</text>
+      <text>未到人数</text>
+    </view>
+    <!-- 请假人数 -->
+    <view>
+      <text class="num leaveNum">02</text>
+      <text>请假人数</text>
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="checkMain">
+    <!-- 未到人员 -->
+    <view class="noArrivePerson">
+      <view class="noArriveHeader">
+        <view class="iconfont icon-tag1"></view>
+        <text>未到人员</text>
+      </view>
+      <rollListItem 
+      rollName="赵小明" 
+      icon="icon-chahao" 
+      arrive=""
+      notArrive="notArrive"
+      ></rollListItem>
+      <rollListItem 
+      rollName="赵小明" 
+      icon="icon-chahao" 
+      arrive=""
+      notArrive="notArrive"
+      ></rollListItem>
+      <rollListItem 
+      rollName="赵小明" 
+      icon="icon-chahao" 
+      arrive=""
+      notArrive="notArrive"
+      ></rollListItem>
+    </view>
+    <!-- 请假人员 -->
+    <view class="leavePerson">
+      <view class="leaveHeader">
+        <view class="iconfont icon-tags1"></view>
+        <text>请假人员</text>
+      </view>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+      <rollListItem 
+      rollName="王小胖" 
+      icon="icon-gantan" 
+      arrive=""
+      leave="leave"
+      ></rollListItem>
+    </view>
+  </view>
+
+  <!-- 全勤 -->
+  <view class="fullAttendance">
+    <text>这次点到全勤哟~</text>
+    <view class="iconfont icon-xiaolian"></view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <button>保存并返回</button>
+</view>

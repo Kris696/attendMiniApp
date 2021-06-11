@@ -1,0 +1,44 @@
+/* pages/login/login.wxss */
+.loginContainer{
+  display: flex;
+  flex-direction: column;
+}
+.logo{
+  margin-top: 300rpx;
+  height: 192rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+}
+
+.logo-img{
+  width: 50px;
+  height: 50px;
+  background-color: #2a8ff7;
+  border-radius: 8rpx;
+}
+
+.logo .iconfont {
+  line-height: 50px;
+  text-align: center;
+  font-size: 28px;
+  color: #fff;
+}
+
+.logo text{
+  margin-top: 56rpx;
+  font-size: 32rpx;
+}
+
+.loginContainer button{
+  margin-top: 170rpx;
+  width: 534rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background-color: #00adff;
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 24rpx;
+}

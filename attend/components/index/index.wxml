@@ -1,0 +1,19 @@
+<!--pages/index/index.wxml-->
+<view class="indexContainer">
+  <!-- 头部 -->
+  <view class="indexBanner">
+    <image src="/static/image/bg1.png" class="img"></image>
+    <view class="words">
+      <text class="text1" wx:if="{{indexMainItemNum==2}}">点到管理</text>
+      <text class="{{text3}}" wx:else>结果统计</text>
+      <text wx:if="{{indexMainItemNum==2}}">小程序点到，快速便捷</text>
+    </view>
+  </view>
+  <!-- 主体 -->
+  
+  <!-- 首页 -->
+  <indexMainItem 
+    indexMainItemNum="{{indexMainItemNum}}"
+    ></indexMainItem>
+
+</view>

@@ -1,0 +1,16 @@
+var express = require('express');
+// 整合点到功能路由
+var check = express.Router();
+
+
+check.get('/', require('../controllers/getCheckInfo'));
+
+// 解析课程数据，存入数据库
+check.get('/addClassinfo', require('../controllers/addClassinfo'));
+// 更新点到人员信息
+check.get('/addCheckInfo', require('../controllers/addCheckInfo'));
+// 获取对应页面点到人员数据
+check.get('/getCheckInfo', require('../controllers/getCheckInfo'));
+
+
+module.exports = check;

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "rollListItem":"/components/rollListItem/rollListItem"
+  },
+  "navigationBarTitleText": "点名结果",
+  "disableScroll": true
+}

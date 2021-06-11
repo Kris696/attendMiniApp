@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "indexMainItem":"/components/indexMain/indexMain"
+  }
+}

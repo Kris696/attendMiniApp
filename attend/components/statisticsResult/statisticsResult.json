@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "table":"/components/table/table/table"    
+  },
+  "disableScroll": true
+}

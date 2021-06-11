@@ -1,0 +1,60 @@
+@import "/static/iconfont/iconfont.wxss";
+
+.rollListItem{
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom:6rpx solid #eee;
+}
+
+.rollListItem .rollMsg{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+}
+
+.rollListItem .rollName{
+  font-size: 36rpx;
+}
+
+.icon-check-circle-fill{
+  color: #34bf49;
+}
+
+.icon-chahao{
+  color: #ff0000;
+}
+
+.icon-gantan{
+  color: #f48924;
+}
+
+.rollButton{
+  display: flex;
+}
+
+.rollButton .btnItem{
+  margin: 0 10rpx;
+  width: 116rpx;
+  height: 52rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  border: 2rpx solid #ccc;
+  color: #666;
+}
+.rollButton .arrive{
+  background-color: #34bf49;
+  color: #fff;
+}
+
+.rollButton .notArrive{
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.rollButton .leave{
+  background-color: #f48924;
+  color: #fff;
+}

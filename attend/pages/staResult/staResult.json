@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "statisticsResult":"/components/statisticsResult/statisticsResult"
+  },
+  "disableScroll": true
+
+}

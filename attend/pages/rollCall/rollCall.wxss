@@ -1,0 +1,54 @@
+.rollCallContainer{
+  padding: 0 40rpx;
+}
+
+/* 点名时间 */
+.rollCallTime{
+  margin: 70rpx 10rpx;
+  display: flex;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  color: #999;
+  border: 2rpx solid #bbb;
+}
+
+.rollCallTime text{
+  width: 30%;
+  border-right:2rpx solid #bbb;
+}
+
+.rollCallTime .time{
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+/* 人员名单 */
+
+
+
+/* 底部 */
+
+.rollCallBottom{
+  position: fixed;
+  bottom: 70rpx;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  width: 414rpx;
+  height: 80rpx;
+  background-color: #e6f1fc;
+  color: #1989fa;
+  text-align: center;
+  border-radius: 6rpx;
+  border: 2rpx solid #a3d0fd;
+}
+.rollCallBottom .arr{
+  width: 50%;
+  line-height: 80rpx;
+}
+
+.rollCallBottom .preArr{
+  border-right: 2rpx solid #a3d0fd;
+}
