@@ -5,31 +5,53 @@ let cheerio = require('cheerio');
 // 数据库模块
 let { sequelize, Classinfo, Checkinfo } = require('../model/db');
 
+//补0
+const formatNumber = n => {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+};
 // 获取当前时间,上午,
 let nowTime = new Date();
+let year = nowTime.getFullYear();
+let month = nowTime.getMonth() + 1;
+let day = nowTime.getDate();
 let hour = nowTime.getHours();
-let week = nowTime.getDay();
+let week = nowTime.getDay()
 let checkTime = hour < 12 ? 0 : 1; //检查时间 0：上午  1：下午
+let checkDate = [year, month, day].map(formatNumber).join('-');
 
-// 获取今日人员名单
-// 添加至classinfo数据库
-// 将有课人员名单添加至checkinfo表
-// 返回checkinfo表数据
+module.exports = async(req, res) => {
+    // 更新课程表模型，
+    await Classinfo.sync({ alter: true });
+    // 原表
+    nowArr = await Classinfo.findAll();
 
-// await User.sync({ force: true });
-// console.log("用户模型表刚刚(重新)创建！");
-
-module.exports = (req, res) => {
     //  解析页面
     var url = "http://59.52.8.42:811/JSAP.asp";
     curl.download(url, async function(html) {
-
         if (html) {
             var $ = cheerio.load(html, { decodeEntities: false });
             // 课表
             let tabel = $("table[width='1003'][cellpadding='1']");
             // 上午或下午
             let trNum = checkTime == 0 ? 1 : 3;
+
+            // 待完成：与原数组比较，id与教师姓名是否与数据库内容一致,如果不一致，更新教师名字
+            // 如果人数有变动
+            let flag = false;
+            if (nowArr.length != $("a[href^='#NO']").length) {
+                flag = true;
+            }
+
+            if (flag) { //如果人数有变(多或少)
+                // let i = 
+                // 添加课程数据至数据库
+                // await Classinfo.create({
+                //     id: id,
+                //     teacherName: teacherName,
+                //     haveClass: haveClass
+                // });
+            }
 
             // ==当时课程数据========================================
             $("a[href^='#NO']").each((index, element) => {
@@ -53,19 +75,27 @@ module.exports = (req, res) => {
                 // console.log(tdContent);
                 let haveClass = tdContent >= 3 ? 1 : 0; // 该时间该老师是否有课，  0：没课   1：有课
 
-                // 添加课程数据至数据库
                 (async() => {
-                    await Classinfo.create({
-                        id: id,
+                    // 添加课程数据至数据库
+                    // await Classinfo.create({
+                    //     id: id,
+                    //     teacherName: teacherName,
+                    //     haveClass: haveClass
+                    // });
+                    // 更新数据库数据
+                    await Classinfo.update({
                         teacherName: teacherName,
                         haveClass: haveClass
+                    }, {
+                        where: {
+                            id: id
+                        }
                     });
                 })();
             });
-
-            console.log("done");
+            // console.log("done");
         } else {
-            console.log("error");
+            console.log("解析失败");
         }
     });
 

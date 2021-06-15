@@ -7,9 +7,10 @@ const formatTime = date => {
   const second = date.getSeconds();
 
   let todayDate=[year].map(formatNumber)+'年'+[month].map(formatNumber)+'月'+[day]+'日';
+  let today=[year, month, day].map(formatNumber).join('.');
   let todayTime=[hour, minute, second].map(formatNumber).join(':');
 
-  return [todayDate,todayTime];
+  return [todayDate,todayTime,today];
 
   // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }

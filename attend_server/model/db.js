@@ -11,7 +11,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
         max: 5,
         min: 0,
         idle: 30000
-    }
+    },
+    logging: false
 });
 
 // 定义模型classinfo，告诉Sequelize如何映射数据库表：
@@ -71,6 +72,18 @@ Checkinfo.init({
     teacherName: {
         type: Sequelize.STRING
     },
+    icon: { //icon-check-circle-fill:勾      icon-chahao：叉     icon-gantan：请假
+        type: Sequelize.STRING,
+    },
+    arrive: {
+        type: Sequelize.STRING
+    },
+    notArrive: {
+        type: Sequelize.STRING
+    },
+    leave: {
+        type: Sequelize.STRING
+    }
 }, {
     sequelize, // 我们需要传递连接实例
     modelName: 'Checkinfo', // 我们需要选择模型名称

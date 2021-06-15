@@ -4,8 +4,8 @@
     <text class="rollName">{{rollName}}</text>
   </view>
   <view class="rollButton">
-    <view class="btnItem {{arrive}}">已到</view>
-    <view class="btnItem {{notArrive}}">未到</view>
-    <view class="btnItem {{leave}}">请假</view>
+    <view data-id="{{checkId}}" class="btnItem {{arrive}}"  bindtap="getArrive">已到</view>
+    <view  data-id="{{checkId}}" class="btnItem {{notArrive}}" bindtap="getNotArrive">未到</view>
+    <view  data-id="{{checkId}}" class="btnItem {{leave}}" bindtap="getLeave">请假</view>
   </view>
 </view>

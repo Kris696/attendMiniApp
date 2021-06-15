@@ -8,7 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checkInfo:[],//今时今日点到信息
+    checkinfo:[],//今时今日点到信息
+    page:1,//页数
+    total:0,//总页数
   },
 
   /**
@@ -23,12 +25,73 @@ Page({
 
     //发送请求,获取今时今日点到信息
     this.getCheckInfo();
+
   },
+
   //发送请求,获取今时今日点到信息
-  async getCheckInfo(){
-    let checkInfo = await request('/check/addCheckInfo');
+   getCheckInfo:async function(){
+    // 请求
+    let {checkinfo,page,total} = await request('/check/getCheckInfo',{page:this.data.page});
+    // 将数据存储值本地
+    wx.setStorageSync('checkinfo', checkinfo);
     this.setData({
-      checkInfo
+      checkinfo,
+      total
+    });
+  },
+
+  // 返回当前页数据至后台
+  saveCheckInfo:function(){
+    // 获取本地存储的值
+    let checkInfoData= wx.getStorageSync('checkinfo');
+    console.log(checkInfoData);
+    checkInfoData=JSON.stringify(checkInfoData);
+    // 调用接口
+    request('/check/saveCheckInfo',{checkInfoData:checkInfoData},"POST");
+  },
+
+  // 上一页
+  getPrePage:function(){
+    if(this.data.page==1) return false;
+    let page = this.data.page - 1 ;
+    this.setData({
+      page
+    });
+    // 返回当前页数据至后台
+    this.saveCheckInfo();
+    // 获取上一页数据
+    this.getCheckInfo();
+  },
+
+  // 下一页
+  getNextPage:function(){
+    if(this.data.page==this.data.total) return false;
+    let page = this.data.page + 1 ;
+    this.setData({
+      page
+    });
+    // 返回当前页数据至后台
+    this.saveCheckInfo();
+    // 获取下一页数据
+    this.getCheckInfo();
+  },
+
+  // 跳转查看结果页面
+  toResultPage:function(){
+    // 返回当前页数据至后台
+    this.saveCheckInfo();
+    // 跳转
+    wx.navigateTo({
+      url: '/pages/staResult/staResult',
+    })
+  },
+
+  // 页面有修改
+  reloadPage:function(){
+    // 获取本地存储
+    let checkInfoData= wx.getStorageSync('checkinfo');
+    this.setData({
+      checkinfo:checkInfoData
     });
   },
 
@@ -36,7 +99,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**

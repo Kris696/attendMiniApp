@@ -11,6 +11,10 @@ check.get('/addClassinfo', require('../controllers/addClassinfo'));
 check.get('/addCheckInfo', require('../controllers/addCheckInfo'));
 // 获取对应页面点到人员数据
 check.get('/getCheckInfo', require('../controllers/getCheckInfo'));
+// 保存数据
+check.post('/saveCheckInfo', require('../controllers/saveCheckInfo'));
+
+
 
 
 module.exports = check;

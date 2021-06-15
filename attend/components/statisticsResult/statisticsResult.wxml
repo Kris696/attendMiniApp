@@ -2,9 +2,9 @@
 <view class="checkContainer">
   <!-- 头部 -->
   <view class="checkHeader">
-    <text class="des">日结</text>
+    <text class="des">{{title}}</text>
     <view class="rollTime">
-      <text class="ymd">2020.04.22</text>
+      <text class="ymd">{{time}}</text>
       <text class="iconfont icon-rili2"></text>
     </view>
   </view>
@@ -47,6 +47,6 @@
   <!-- 保存按钮 -->
   <view class="btnBox">
     <view class="btn">打印结果</view>
-    <view class="btn">保存并返回</view>
+    <view class="btn" bindtap="toIndexPage">保存并返回</view>
   </view>
 </view>

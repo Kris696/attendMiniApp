@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/rollCall/rollCall",
-    "pages/index/index",
-    "pages/statisticsIndex/statisticsIndex",
-    "pages/check/check",
     "pages/staResult/staResult",
+    "pages/rollCall/rollCall",
+    "pages/statisticsIndex/statisticsIndex",
+    "pages/index/index",
+    "pages/check/check",
     "pages/login/login"
   ],
   "window": {

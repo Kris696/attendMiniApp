@@ -17,6 +17,8 @@
 
 .rollListItem .rollName{
   font-size: 36rpx;
+  text-align: center;
+  width: 140rpx;
 }
 
 .icon-check-circle-fill{

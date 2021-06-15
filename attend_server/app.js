@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// 处理post请求参数
+const bodyPaser = require('body-parser');
+
 // 引用路由模块
 var checkRouter = require('./routes/check');
 var statisticsRouter = require('./routes/statistics');
@@ -13,6 +16,9 @@ var app = express();
 var http = require('http');
 var server = http.createServer(app);
 
+// 处理post请求参数
+app.use(bodyPaser.urlencoded({ extended: false }));
+app.use(bodyPaser.json())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

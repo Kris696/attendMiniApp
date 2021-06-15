@@ -10,6 +10,7 @@ export default (url,data={},method="GET")=>{
       method,
       header:{
         // cookie : wx.getStorageSync('cookies') ? wx.getStorageSync('cookies').find(item=> item.indexOf('MUSIC_U') !== -1):''
+        'Content-Type': 'application/json'
       },
       success:(res)=>{
         console.log('请求成功'+res);

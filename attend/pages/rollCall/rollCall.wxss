@@ -52,3 +52,7 @@
 .rollCallBottom .preArr{
   border-right: 2rpx solid #a3d0fd;
 }
+
+.rollCallBottom .gray{
+  background-color: #ccc;
+}

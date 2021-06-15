@@ -12,31 +12,29 @@
   <!-- 人员名单 -->
   <view class="rollList">
     <rollListItem 
-    rollName="赵小明" 
-    icon="icon-chahao" 
-    arrive=""
-    notArrive="notArrive"
+    wx:for="{{checkinfo}}"
+    wx:key="id"
+    checkId="{{item.check_id}}"
+    rollName="{{item.teacherName}}" 
+    icon="{{item.icon}}" 
+    arrive="{{item.arrive}}"
+    notArrive="{{item.notArrive}}"
+    leave="{{item.leave}}"
+    bindtap="reloadPage"
     ></rollListItem>
-    
-    <!-- <rollListItem 
-    rollName="赵小明" 
-    icon="icon-chahao" 
-    arrive=""
-    notArrive="notArrive"
-    ></rollListItem> -->
 
   </view>
 
   <!-- 底部 -->
   <view class="rollCallBottom">
-    <view class="arr preArr">
+    <view class="arr preArr {{page==1?'gray':''}}" bindtap="getPrePage">
       <view class="iconfont"></view>
       <text>上一页</text>
     </view>
-    <view class="arr nextArr">
-      <view class="iconfont"></view>
-      <text>下一页</text>
-      <!-- <text>查看结果</text> -->
+    <view class="arr nextArr" bindtap="getNextPage">
+      <view class="iconfont" wx:if="{{page!=total}}"></view>
+      <text wx:if="{{page!=total}}">下一页</text>
+      <text wx:if="{{page==total}}" bindtap="toResultPage">查看结果</text>
     </view>
   </view>
 </view>
