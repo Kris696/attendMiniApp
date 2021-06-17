@@ -38,13 +38,14 @@ Page({
       checkinfo,
       total
     });
+    console.log(checkinfo);
   },
 
   // 返回当前页数据至后台
   saveCheckInfo:function(){
     // 获取本地存储的值
     let checkInfoData= wx.getStorageSync('checkinfo');
-    console.log(checkInfoData);
+    console.log(checkInfoData)
     checkInfoData=JSON.stringify(checkInfoData);
     // 调用接口
     request('/check/saveCheckInfo',{checkInfoData:checkInfoData},"POST");
@@ -80,6 +81,8 @@ Page({
   toResultPage:function(){
     // 返回当前页数据至后台
     this.saveCheckInfo();
+    // 清除本地存储内容
+    wx.removeStorageSync('checkinfo');
     // 跳转
     wx.navigateTo({
       url: '/pages/staResult/staResult',

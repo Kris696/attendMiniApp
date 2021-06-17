@@ -1,0 +1,8 @@
+<!--今日统计-->
+<statisticsResult
+title="今日结果统计"
+time="{{time}}"
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="today"
+></statisticsResult>

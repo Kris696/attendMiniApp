@@ -5,20 +5,8 @@ let cheerio = require('cheerio');
 // 数据库模块
 let { sequelize, Classinfo, Checkinfo } = require('../model/db');
 
-//补0
-const formatNumber = n => {
-    n = n.toString()
-    return n[1] ? n : '0' + n
-};
-// 获取当前时间,上午,
-let nowTime = new Date();
-let year = nowTime.getFullYear();
-let month = nowTime.getMonth() + 1;
-let day = nowTime.getDate();
-let hour = nowTime.getHours();
-let week = nowTime.getDay()
-let checkTime = hour < 12 ? 0 : 1; //检查时间 0：上午  1：下午
-let checkDate = [year, month, day].map(formatNumber).join('-');
+// 获取检查时间及日期
+const { checkTime, checkDate, week } = require('../util/getdate');
 
 module.exports = async(req, res) => {
     // 更新课程表模型，

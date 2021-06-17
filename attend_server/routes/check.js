@@ -15,6 +15,4 @@ check.get('/getCheckInfo', require('../controllers/getCheckInfo'));
 check.post('/saveCheckInfo', require('../controllers/saveCheckInfo'));
 
 
-
-
 module.exports = check;

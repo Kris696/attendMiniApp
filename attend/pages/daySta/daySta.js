@@ -1,4 +1,4 @@
-// pages/staResult/staResult.js
+// pages/daySta/daySta.js
 var util=require('../../utils/util');
 
 Page({
@@ -20,7 +20,6 @@ Page({
     this.setData({
       time : date[2]
     });
-
   },
 
   /**

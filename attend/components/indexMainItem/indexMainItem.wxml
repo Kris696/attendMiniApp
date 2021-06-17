@@ -1,5 +1,0 @@
-<view class="indexMainItem" wx:for="{{itemText}}">
-  <text class="itemText1">点个小到</text>
-  <image src="/static/image/bg2.png" class="itemImg"></image>
-  <!-- <text class="text2">点个小到</text> -->
-</view>

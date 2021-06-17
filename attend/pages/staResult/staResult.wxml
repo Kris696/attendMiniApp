@@ -1,2 +1,9 @@
 <!--pages/staResult/staResult.wxml-->
-<statisticsResult></statisticsResult>
+<statisticsResult
+title="本次点到结果"
+time="{{time}}"
+totalNum="01"
+isPrint="{{isPrint}}"
+pageUrl="/pages/index/index"
+tableData="now"
+></statisticsResult>

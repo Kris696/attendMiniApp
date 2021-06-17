@@ -1,25 +1,17 @@
-// pages/staResult/staResult.js
-var util=require('../../utils/util');
-
+// pages/personSta/personSta.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    time:'',//显示时间
-    isPrint:false,//是否显示打印按钮
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 设置时间
-    var date=util.formatTime(new Date());
-    this.setData({
-      time : date[2]
-    });
 
   },
 

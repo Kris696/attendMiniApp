@@ -11,42 +11,42 @@
 
   <!-- 数据统计 -->
   <view class="checkCount">
-    <!-- 总人数 -->
+    <!-- 点到次数 -->
     <view class="checkCountItem">
-      <text class="num totalNum">02</text>
+      <text class="num totalNum">{{totalNum}}</text>
       <text>点到次数</text>
     </view>
-    <!-- 未到人数 -->
+    <!-- 未到人次 -->
     <view class="checkCountItem">
-      <text class="num noArriveNum">03</text>
+      <text class="num noArriveNum">{{noArriveNum}}</text>
       <text>未到人次</text>
     </view>
-    <!-- 请假人数 -->
+    <!-- 请假人次 -->
     <view class="checkCountItem qj">
-      <text class="num leaveNum">02</text>
+      <text class="num leaveNum">{{leaveNum}}</text>
       <text>请假人次</text>
     </view>
   </view>
 
   <!-- 内容 -->
-  <view class="checkMain">
+  <view class="checkMain" wx:if="{{dataList.length!=0}}">
     <table 
       class="table" 
       columns="{{tableColumns}}" 
       dataList="{{dataList}}" 
       getListLoading="{{getListLoading}}" 
-      showTipImage="{{dataList.length===0&!getListLoading}}" bindclicklistitem="handleClickItem" />
+      showTipImage="{{dataList.length===0&!getListLoading}}" />
   </view>
 
   <!-- 全勤 -->
-  <!-- <view class="fullAttendance">
+  <view class="fullAttendance"  wx:if="{{dataList.length==0}}">
     <text>今日全勤哟~</text>
     <view class="iconfont icon-xiaolian"></view>
-  </view> -->
+  </view>
 
   <!-- 保存按钮 -->
   <view class="btnBox">
-    <view class="btn">打印结果</view>
-    <view class="btn" bindtap="toIndexPage">保存并返回</view>
+    <view class="btn" wx:if="{{isPrint}}">打印结果</view>
+    <view class="btn" data-url="{{pageUrl}}" bindtap="toIndexPage">返回首页</view>
   </view>
 </view>

@@ -1,20 +1,7 @@
 // 添加点到人员信息
 const { sequelize, Classinfo, Checkinfo } = require('../model/db');
-
-//补0
-const formatNumber = n => {
-    n = n.toString()
-    return n[1] ? n : '0' + n
-}
-
-let nowTime = new Date();
-let year = nowTime.getFullYear();
-let month = nowTime.getMonth() + 1;
-let day = nowTime.getDate();
-let hour = nowTime.getHours();
-
-let checkTime = hour < 12 ? 0 : 1; //检查时间 0：上午  1：下午
-let checkDate = [year, month, day].map(formatNumber).join('-');
+// 获取检查时间及日期
+const { checkTime, checkDate } = require('../util/getdate');
 
 let nowDateArr = [];
 

@@ -6,12 +6,10 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    
     //发送请求,解析页面数据
     this.addClassinfo();
     //发送请求,添加点到信息
     this.addCheckInfo();
-
   },
 
   //发送请求,解析页面数据

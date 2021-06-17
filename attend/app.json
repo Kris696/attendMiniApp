@@ -1,11 +1,15 @@
 {
   "pages": [
+    "pages/weekSta/weekSta",
+    "pages/daySta/daySta",
     "pages/staResult/staResult",
     "pages/rollCall/rollCall",
-    "pages/statisticsIndex/statisticsIndex",
     "pages/index/index",
+    "pages/statisticsIndex/statisticsIndex",
     "pages/check/check",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/monthSta/monthSta",
+    "pages/personSta/personSta"
   ],
   "window": {
     "backgroundTextStyle": "light",
