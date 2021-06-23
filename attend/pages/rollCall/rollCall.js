@@ -38,7 +38,7 @@ Page({
       checkinfo,
       total
     });
-    console.log(checkinfo);
+    // console.log(checkinfo);
   },
 
   // 返回当前页数据至后台

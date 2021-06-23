@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "calendar": "/components/wx-calendar/index",
+    "statisticsResult":"/components/statisticsResult/statisticsResult"
+  }
+}

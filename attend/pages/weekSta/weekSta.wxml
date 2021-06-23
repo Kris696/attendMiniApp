@@ -4,5 +4,5 @@ title="本周结果统计"
 time="06.14-06.18"
 isPrint="{{isPrint}}"
 pageUrl="/pages/statisticsIndex/statisticsIndex"
-tableData="today"
+tableData="week"
 ></statisticsResult>

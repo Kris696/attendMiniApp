@@ -1,4 +1,4 @@
-const { sequelize, Classinfo, Checkinfo } = require('../model/db');
+const { sequelize, Classinfo, Checkinfo } = require('../db/db');
 // 获取检查时间及日期
 const { checkTime, checkDate } = require('../util/getdate');
 

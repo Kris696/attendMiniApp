@@ -1,5 +1,5 @@
 // 添加点到人员信息
-const { sequelize, Classinfo, Checkinfo } = require('../model/db');
+const { sequelize, Classinfo, Checkinfo } = require('../db/db');
 // 获取检查时间及日期
 const { checkTime, checkDate } = require('../util/getdate');
 
@@ -16,14 +16,17 @@ module.exports = async(req, res) => {
         }
     });
 
-    // 没有当前当时的数据，才添加
+    // 获取当日课程信息
+    let classinfo = await Classinfo.findAll();
+
+    // 没有当前当时的数据 或 数据不相等，才添加
     if (nowDateArr.length == 0) {
-        // 获取当日课程信息
-        let classinfo = await Classinfo.findAll();
+
         // 添加信息
         classinfo.forEach(async(item, index) => {
             // 有课人员
             if (item.haveClass === 1) {
+                console.log(item);
                 // 添加点到人员信息
                 await Checkinfo.create({
                     checkDate: checkDate,

@@ -1,1 +1,44 @@
 /* pages/daySta/daySta.wxss */
+@import "/static/iconfont/iconfont.wxss";
+
+.noarrive{
+  width: 20rpx;
+  height: 20rpx;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.callsick{
+  width: 20rpx;
+  height: 20rpx;
+  background-color: orange;
+  border-radius: 50%;
+}
+
+.fullAttendance{
+  display: flex;
+  justify-content: space-around;
+  margin: 160rpx auto;
+  width: 70%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  border:2rpx solid #67c23a;
+  border-radius: 8rpx;
+}
+
+.fullAttendance .iconfont{
+  color: #67c23a;
+}
+
+.btn{
+  margin: 0 auto;
+  width: 40%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #1989fa;
+  background-color: #e6f1fc;
+  border:2rpx solid #a3d0fd;
+  border-radius: 8rpx;
+}

@@ -16,6 +16,7 @@ Component({
     isPrint:Boolean,//是否显示打印按钮
     pageUrl:String,//跳转链接
     tableData:String,//表格类型数据
+    checkTimes:Number,//日结跳转设置
   },
 
   /**
@@ -39,6 +40,9 @@ Component({
     noArriveNum:'',//未到人次
     leaveNum:'',//请假人次
     time:'',//显示时间
+    checkTimes:0,
+    tableTitle:'',
+    isTitle:true,
   },
 
   /**
@@ -46,11 +50,12 @@ Component({
    */
   methods: {
     //返回首页
-    toIndexPage:function(event){  
+    toIndexPage:function(event){
+      wx.removeStorageSync('change');
       let url = event.currentTarget.dataset.url;
       wx.reLaunch({
         url: url
-      })
+      });
     },
     // 获取当时统计数据
     getNowDate:async function(){
@@ -63,29 +68,87 @@ Component({
     },
     // 获取今日统计数据
     getTodayDate:async function(){
-      let {dataList,noArriveNum,leaveNum,totalNum}=await request('/statistics/today');
-      this.setData({
-        dataList,
-        noArriveNum:'0'+noArriveNum,
-        leaveNum:'0'+leaveNum,
-        totalNum:'0'+totalNum
+        if(this.data.checkTimes==1 || this.data.checkTimes==2){//只上午或只下午
+        let {result}=await request('/statistics/today');
+        this.setData({
+          dataList:result.dataList,
+          noArriveNum:'0'+result.noArriveNum,
+          leaveNum:'0'+result.leaveNum,
+          totalNum:'0'+result.totalNum
+        });
+      }else{//两次点到
+        if (wx.getStorageSync('change')=='') {
+          let {result}=await request('/statistics/today');
+          this.setData({
+            dataList:result.morningDate,
+            noArriveNum:'0'+result.noArriveNum,
+            leaveNum:'0'+result.leaveNum,
+            totalNum:'0'+result.totalNum,
+            checkTimes:result.checkTimes,
+            tableTitle:'上午数据',
+          });
+          wx.removeStorageSync('change');
+        }else if(wx.getStorageSync('change')=='xw'){
+          let {result}=await request('/statistics/today');
+          this.setData({
+            dataList:result.afternoonDate,
+            noArriveNum:'0'+result.noArriveNum,
+            leaveNum:'0'+result.leaveNum,
+            totalNum:'0'+result.totalNum,
+            checkTimes:result.checkTimes,
+            tableTitle:'下午数据',
+          });
+        }else if(wx.getStorageSync('change')=='zong'){//总统计
+          let {result}=await request('/statistics/today');
+          this.setData({
+            dataList:result.dataList,
+            noArriveNum:'0'+result.noArriveNum,
+            leaveNum:'0'+result.leaveNum,
+            totalNum:'0'+result.totalNum,
+            checkTimes:result.checkTimes,
+            tableTitle:'总计',
+          });
+        }
+      }
+    },
+    // 查看下午数据
+    toAfternoon:function(){
+      wx.setStorageSync('change', 'xw');
+      wx.navigateTo({
+        url: '/pages/daySta/daySta',
       });
     },
+
+    // 查看今日总计数据
+    toRes:function(){
+      wx.setStorageSync('change', 'zong');
+      wx.navigateTo({
+        url: '/pages/daySta/daySta',
+      });
+    },
+
     //获取本周统计数据
     getWeekDate:async function(){
-      let {dataList,noArriveNum,leaveNum,totalNum}=await request('/statistics/week');
+      // 隐藏标题
       this.setData({
-        dataList,
-        noArriveNum:'0'+noArriveNum,
-        leaveNum:'0'+leaveNum,
-        totalNum:'0'+totalNum
+        isTitle:false,
       });
+      
+      let {weekDataList}=await request('/statistics/week');
+      // this.setData({
+      //   dataList,
+      //   noArriveNum:'0'+noArriveNum,
+      //   leaveNum:'0'+leaveNum,
+      //   totalNum:'0'+totalNum,
+      //   tableColumns
+      // });
     },
   },
   // 组件生命周期
   lifetimes: {
     attached: function() {
       // 在组件实例进入页面节点树时执行
+      // console.log(this.data.tableData);
       // 获取列表数据
       switch (this.data.tableData) {
         case 'now'://本次
@@ -110,6 +173,7 @@ Component({
     },
     detached: function() {
       // 在组件实例被从页面节点树移除时执行
+
     },
   },
 })

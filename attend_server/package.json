@@ -1,28 +1,28 @@
 {
-    "name": "attend-server",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "start": "node ./app"
-    },
-    "dependencies": {
-        "cheerio": "^1.0.0-rc.9",
-        "cookie-parser": "~1.4.4",
-        "debug": "~2.6.9",
-        "express": "~4.16.1",
-        "http-errors": "~1.6.3",
-        "iconv-lite": "^0.6.3",
-        "jade": "~1.11.0",
-        "morgan": "~1.9.1",
-        "mysql": "^2.18.1",
-        "mysql2": "^2.2.5",
-        "request": "^2.88.2",
-        "sequelize": "^6.6.2"
-    },
-    "main": "app.js",
-    "devDependencies": {},
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "description": ""
+  "name": "attend-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.9",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "iconv-lite": "^0.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "request": "^2.88.2",
+    "sequelize": "^6.6.2"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

@@ -1,0 +1,14 @@
+<!--pages/calendarSta/calendarSta.wxml-->
+<!-- 日历 -->
+<calendar 
+id="calendar" 
+bindload="handleCalendarLoad" 
+_vibrate="{{_vibrate}}"
+/>
+<!-- 数据 -->
+<statisticsResult 
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="week"
+></statisticsResult>
+

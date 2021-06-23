@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 // const sequelize = new Sequelize('sqlite::memory');
 
-const config = require('../util/dbconfig');
+const config = require('../config/dbconfig');
 
 // 创建sequelize对象实例
 const sequelize = new Sequelize(config.database, config.username, config.password, {

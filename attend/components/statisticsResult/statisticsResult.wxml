@@ -1,7 +1,7 @@
 <!--components/statisticsResult/statisticsResult.wxml-->
 <view class="checkContainer">
   <!-- 头部 -->
-  <view class="checkHeader">
+  <view class="checkHeader" wx:if="{{isTitle}}">
     <text class="des">{{title}}</text>
     <view class="rollTime">
       <text class="ymd">{{time}}</text>
@@ -29,13 +29,15 @@
   </view>
 
   <!-- 内容 -->
+  <view wx:if="{{checkTimes == 3}}" class="tableTitle">{{tableTitle}}</view>
   <view class="checkMain" wx:if="{{dataList.length!=0}}">
     <table 
       class="table" 
       columns="{{tableColumns}}" 
       dataList="{{dataList}}" 
       getListLoading="{{getListLoading}}" 
-      showTipImage="{{dataList.length===0&!getListLoading}}" />
+      showTipImage="{{dataList.length===0&!getListLoading}}"
+      initExpandValue="暂无备注" />
   </view>
 
   <!-- 全勤 -->
@@ -47,6 +49,8 @@
   <!-- 保存按钮 -->
   <view class="btnBox">
     <view class="btn" wx:if="{{isPrint}}">打印结果</view>
+    <view class="btn" wx:if="{{checkTimes==3&&tableTitle=='上午数据'}}" bindtap="toAfternoon">下一页</view>
+    <view class="btn" wx:if="{{checkTimes==3&&tableTitle=='下午数据'}}" bindtap="toRes">下一页</view>
     <view class="btn" data-url="{{pageUrl}}" bindtap="toIndexPage">返回首页</view>
   </view>
 </view>

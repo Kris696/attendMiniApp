@@ -1,8 +1,64 @@
 <!--今日统计-->
+<!-- 只有上午 -->
 <statisticsResult
+wx:if="{{checkTimes==1}}"
+title="今日结果统计-只有上午"
+time="{{time}}"
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="today"
+checkTimes="{{checkTimes}}"
+></statisticsResult>
+
+<!-- 只有下午 -->
+<statisticsResult
+wx:if="{{checkTimes==2}}"
+title="今日结果统计-只有下午"
+time="{{time}}"
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="today"
+checkTimes="{{checkTimes}}"
+></statisticsResult>
+
+<!-- 都没有 -->
+<view class="fullAttendance"  wx:if="{{checkTimes==0}}">
+  <text>今日没有点到哟~</text>
+  <view class="iconfont icon-xiaolian"></view>
+</view>
+<view wx:if="{{checkTimes==0}}" class="btn" bindtap="toIndexPage">返回首页</view>
+
+<!-- 都有 -->
+<!-- 上午 -->
+<statisticsResult
+wx:if="{{checkTimes==3&&nextPage==1}}"
 title="今日结果统计"
 time="{{time}}"
 isPrint="{{isPrint}}"
 pageUrl="/pages/statisticsIndex/statisticsIndex"
 tableData="today"
+checkTimes="{{checkTimes}}"
 ></statisticsResult>
+<!-- 下午 -->
+<statisticsResult
+wx:if="{{checkTimes==3&&nextPage==2}}"
+title="今日结果统计"
+time="{{time}}"
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="today"
+checkTimes="{{checkTimes}}"
+></statisticsResult>
+<!-- 总计 -->
+<statisticsResult
+wx:if="{{checkTimes==3&&nextPage==3}}"
+title="今日结果统计"
+time="{{time}}"
+isPrint="{{isPrint}}"
+pageUrl="/pages/statisticsIndex/statisticsIndex"
+tableData="today"
+checkTimes="{{checkTimes}}"
+></statisticsResult>
+
+<!-- <view class="noarrive"></view> -->
+<!-- <view class="callsick"></view> -->

@@ -35,7 +35,7 @@ Component({
         text:'本月统计',
         imgUrl:'/static/image/bg4.png'
       },{
-        text:'个人结果统计',
+        text:'日历',
         imgUrl:'/static/image/bg5.png'
       }
     ],
@@ -79,7 +79,7 @@ Component({
         break;
         case 3:
           wx.navigateTo({
-            url: '/pages/personSta/personSta',
+            url: '/pages/calendarSta/calendarSta',
           });
         break;
         default:

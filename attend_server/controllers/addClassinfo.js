@@ -3,7 +3,7 @@
 let curl = require("../util/curl");
 let cheerio = require('cheerio');
 // 数据库模块
-let { sequelize, Classinfo, Checkinfo } = require('../model/db');
+let { sequelize, Classinfo, Checkinfo } = require('../db/db');
 
 // 获取检查时间及日期
 const { checkTime, checkDate, week } = require('../util/getdate');

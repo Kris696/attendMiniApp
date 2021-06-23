@@ -10,10 +10,11 @@ statistics.get('/', function(req, res, next) {
 // 获取实时点到结果
 statistics.get('/now', require('../controllers/getNowData'));
 // 获取今日点到结果
-statistics.get('/today', require('../controllers/getTodayData'));
+statistics.get('/today', require('../model/getTodayData'));
 // 获取本周点到结果
-statistics.get('/week', require('../controllers/getWeekData'));
-
+statistics.get('/week', require('../model/getWeekData'));
+// 获取本月点到结果
+statistics.get('/month', require('../model/getMonthData'));
 
 
 module.exports = statistics;

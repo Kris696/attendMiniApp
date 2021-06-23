@@ -1,15 +1,17 @@
 {
   "pages": [
     "pages/weekSta/weekSta",
+    "pages/index/index",
+    "pages/calendarSta/calendarSta",
+    "pages/statisticsIndex/statisticsIndex",
     "pages/daySta/daySta",
     "pages/staResult/staResult",
     "pages/rollCall/rollCall",
-    "pages/index/index",
-    "pages/statisticsIndex/statisticsIndex",
     "pages/check/check",
     "pages/login/login",
     "pages/monthSta/monthSta",
-    "pages/personSta/personSta"
+    "pages/personSta/personSta",
+    "pages/demo/demo"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,5 +1,6 @@
 // pages/daySta/daySta.js
 var util=require('../../utils/util');
+import request from '../../utils/request';
 
 Page({
 
@@ -9,17 +10,43 @@ Page({
   data: {
     time:'',//显示时间
     isPrint:false,//是否显示打印按钮
+    checkTimes:0,//跳转设置
+    nextPage:1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad:async function (options) {
     // 设置时间
     var date=util.formatTime(new Date());
     this.setData({
       time : date[2]
     });
+    // 获取页面跳转设置
+    let {result}=await request('/statistics/today');
+    this.setData({
+      checkTimes:result.checkTimes
+    });
+    // 都有
+    if(wx.getStorageSync('change')=='xw'){
+      this.setData({
+        nextPage:2
+      });
+    };
+    // 总计
+    if(wx.getStorageSync('change')=='zong'){
+      this.setData({
+        nextPage:3
+      });
+    };
+  },
+
+  //返回首页
+  toIndexPage:function(){  
+    wx.reLaunch({
+      url: '/pages/statisticsIndex/statisticsIndex'
+    })
   },
 
   /**

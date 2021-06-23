@@ -1,11 +1,14 @@
-// pages/statisticsIndex/statisticsIndex.js
+// pages/calendarSta/calendarSta.js
+import request from '../../utils/request';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isPrint:true,
+    _vibrate:false,
   },
 
   /**
@@ -14,6 +17,12 @@ Page({
   onLoad: function (options) {
 
   },
+
+  handleCalendarLoad({ detail }) {
+    // console.log('calendar-load', detail);
+    // this.calendar = this.selectComponent('#calendar')
+
+},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -26,7 +35,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.removeStorageSync('change');
 
   },
 
