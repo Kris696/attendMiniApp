@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/weekSta/weekSta",
     "pages/index/index",
     "pages/calendarSta/calendarSta",
+    "pages/weekSta/weekSta",
     "pages/statisticsIndex/statisticsIndex",
     "pages/daySta/daySta",
     "pages/staResult/staResult",

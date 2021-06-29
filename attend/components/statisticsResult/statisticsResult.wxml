@@ -29,7 +29,7 @@
   </view>
 
   <!-- 内容 -->
-  <view wx:if="{{checkTimes == 3}}" class="tableTitle">{{tableTitle}}</view>
+  <view wx:if="{{checkTimes == 3||tableTitle==tableTitleList[weekPage]}}" class="tableTitle">{{tableTitle}}</view>
   <view class="checkMain" wx:if="{{dataList.length!=0}}">
     <table 
       class="table" 
@@ -42,15 +42,19 @@
 
   <!-- 全勤 -->
   <view class="fullAttendance"  wx:if="{{dataList.length==0}}">
-    <text>今日全勤哟~</text>
+    <text wx:if="{{!checkTimes==3&&tableTitle==tableTitleList[weekPage]}}">今日全勤哟~</text>
+    <text wx:if="{{tableTitle==tableTitleList[weekPage]&&checkTimes==0}}">这天没有点到哟~</text>
+    <text wx:if="{{tableTitle==tableTitleList[weekPage]&&checkTimes!=0}}">这天{{toopltipText}}全勤哟~</text>
     <view class="iconfont icon-xiaolian"></view>
   </view>
 
   <!-- 保存按钮 -->
   <view class="btnBox">
+    <view class="btn" wx:if="{{tableTitle==tableTitleList[weekPage]&&weekPage<6}}" bindtap="toNextWeekDate">下一页</view>
     <view class="btn" wx:if="{{isPrint}}">打印结果</view>
     <view class="btn" wx:if="{{checkTimes==3&&tableTitle=='上午数据'}}" bindtap="toAfternoon">下一页</view>
     <view class="btn" wx:if="{{checkTimes==3&&tableTitle=='下午数据'}}" bindtap="toRes">下一页</view>
     <view class="btn" data-url="{{pageUrl}}" bindtap="toIndexPage">返回首页</view>
   </view>
 </view>
+

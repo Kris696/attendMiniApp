@@ -18,6 +18,8 @@ Page({
 
   },
 
+  
+
   handleCalendarLoad({ detail }) {
     // console.log('calendar-load', detail);
     // this.calendar = this.selectComponent('#calendar')

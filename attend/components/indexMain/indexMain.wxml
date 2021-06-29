@@ -1,7 +1,7 @@
 <!-- 首页 -->
 <view class="indexMain" wx:if="{{indexMainItemNum==2}}">
   <view class="indexMainItem" wx:for="{{indexItem}}" wx:key="index" data-index="{{index}}" bindtap="changePage">
-    <text class="itemText1" wx:if="{{index%2==0}}">{{item.text}}</text>
+    <text class="itemText1" wx:if="{{index%2==0}}" bindtap="getConfirm">{{item.text}}</text>
     <image src="{{item.imgUrl}}" class="itemImg"></image>
     <text class="itemText1" wx:if="{{index%2==1}}">{{item.text}}</text>
   </view>

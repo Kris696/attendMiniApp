@@ -27,6 +27,7 @@ Page({
    */
   onShow: function () {
     wx.removeStorageSync('change');
+    wx.removeStorageSync('weekPage');
 
   },
 

@@ -22,10 +22,22 @@ Page({
     this.setData({
       time: time
     });
-
+    
+    //发送请求,解析页面数据
+    this.addClassinfo();
+    //发送请求,添加点到信息
+    this.addCheckInfo();
     //发送请求,获取今时今日点到信息
     this.getCheckInfo();
+  },
+  //发送请求,解析页面数据
+  addClassinfo:function(){
+    request('/check/addClassinfo');
+  },
 
+  //发送请求,添加点到信息
+  addCheckInfo:function(){
+    request('/check/addCheckInfo');
   },
 
   //发送请求,获取今时今日点到信息

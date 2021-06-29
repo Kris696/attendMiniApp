@@ -49,8 +49,20 @@ Component({
     // 首页页面跳转方法
     changePage(event){
       if (event.currentTarget.dataset.index==0) {// 跳转至点到页面
-        wx.navigateTo({
-          url: '/pages/rollCall/rollCall',
+        wx.showModal({
+          title: '是否进入点到页面',
+          // content: '这是一个模态弹窗',
+          success (res) {
+            if (res.confirm) {
+              // console.log('用户点击确定');
+              //点到页面
+              wx.navigateTo({
+                url: '/pages/rollCall/rollCall',
+              });
+            } else if (res.cancel) {
+              // console.log('用户点击取消');
+            }
+          }
         });
       }else{//跳转至结果统计页面
         wx.navigateTo({

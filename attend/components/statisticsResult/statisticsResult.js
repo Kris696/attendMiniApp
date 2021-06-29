@@ -2,7 +2,9 @@
 import request from '../../utils/request';
 
 Component({
-  
+  options: {
+    addGlobalClass: true
+  },
   /**
    * 组件的属性列表
    */
@@ -17,6 +19,7 @@ Component({
     pageUrl:String,//跳转链接
     tableData:String,//表格类型数据
     checkTimes:Number,//日结跳转设置
+    weekPage:Number,
   },
 
   /**
@@ -43,6 +46,8 @@ Component({
     checkTimes:0,
     tableTitle:'',
     isTitle:true,
+    tableTitleList:['周日数据','周一数据','周二数据','周三数据','周四数据','周五数据','周六数据'],
+    toopltipText:'',
   },
 
   /**
@@ -118,7 +123,6 @@ Component({
         url: '/pages/daySta/daySta',
       });
     },
-
     // 查看今日总计数据
     toRes:function(){
       wx.setStorageSync('change', 'zong');
@@ -126,23 +130,155 @@ Component({
         url: '/pages/daySta/daySta',
       });
     },
-
     //获取本周统计数据
     getWeekDate:async function(){
+      let {weekDataList,checkMount,noArriveNumMount,leaveNumMount}=await request('/statistics/week');
+      // 补0
+      let totalNum=checkMount < 9 ? '0' + checkMount : checkMount;
+      let noArriveNum=noArriveNumMount < 9 ? '0' + noArriveNumMount : noArriveNumMount;
+      let leaveNum= leaveNumMount < 9 ? '0' + leaveNumMount : leaveNumMount;
+      // 设置表头
+      let tableColumns= [{
+        title: "姓名",
+        key: "teacherName",
+      }, {
+          title: "上午",
+          key: "morning",
+      }, {
+          title: "下午",
+          key: "afternoon",
+      }];
+      // 下一周功能函数
+      if (this.properties.weekPage==0) {
+        wx.setStorageSync('weekPage', this.properties.weekPage)
+      }
+      // 这天点到次数
+      let checkTimes = weekDataList[this.data.weekPage].checkTimes;
+      console.log(checkTimes);
+      this.setData({
+        checkTimes
+      });
+      let dataList=[];
+      let noarrive='未到';
+      let callSick='请假';
+      let arr = weekDataList[this.data.weekPage].dataList;
+      // 添加数据
+      if (checkTimes!=0 ) {
+        // 添加教师名字
+        for (let i = 0; i < arr.length; i++) {
+          let data =arr[i].teacherName;
+          dataList.push({teacherName:data});
+        }
+        // 只有早上检查
+        if (checkTimes==1) {
+          console.log('xixixi');
+          this.setData({
+            toopltipText:'上午'
+          });
+          // 添加早上数据
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dataList.length; j++) {
+              if (arr[i].teacherName == dataList[j].teacherName) {
+                if (arr[i].noArriveTimes==1) {
+                  dataList[j].morning='未到';
+                }else if (arr[i].leaveTimes==1) {
+                  dataList[j].morning='请假'
+                }
+              }  
+            }            
+          }
+        }else if (checkTimes==2) {
+          console.log('hahahah');
+          this.setData({
+            toopltipText:'下午'
+          });
+          // 添加下午数据
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dataList.length; j++) {
+              if (arr[i].teacherName == dataList[j].teacherName) {
+                if (arr[i].noArriveTimes==1) {
+                  dataList[j].afternoon='未到'
+                }else if (arr[i].leaveTimes==1) {
+                  dataList[j].afternoon='请假'
+                }
+              }  
+            }            
+          }
+        }else if (checkTimes==3) {
+          console.log('lalalalal');
+          //添加早上数据
+          arr = weekDataList[this.data.weekPage].morningDate;
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dataList.length; j++) {
+              if (arr[i].teacherName == dataList[j].teacherName) {
+                if (arr[i].noArriveTimes==1) {
+                  dataList[j].morning='未到'
+                }else if (arr[i].leaveTimes==1) {
+                  dataList[j].morning='请假'
+                }
+              }  
+            }            
+          }
+          // 添加下午数据
+          arr = weekDataList[this.data.weekPage].afternoonDate;
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dataList.length; j++) {
+              if (arr[i].teacherName == dataList[j].teacherName) {
+                if (arr[i].noArriveTimes==1) {
+                  dataList[j].afternoon='未到'
+                }else if (arr[i].leaveTimes==1) {
+                  dataList[j].afternoon='请假'
+                }
+              }  
+            }            
+          }
+        }
+      }
+      
+      this.setData({
+        dataList:dataList,
+        noArriveNum,
+        leaveNum,
+        totalNum,
+        checkTimes:checkTimes,
+        tableTitle:this.data.tableTitleList[this.data.weekPage],
+        tableColumns,
+      });
+    },
+    // 查看下一周数据
+    toNextWeekDate:function(){
+      let weekPage = wx.getStorageSync('weekPage');
+      if (weekPage<6) {
+        weekPage+=2;
+        wx.setStorageSync('weekPage', weekPage);
+        wx.navigateTo({
+          url: '/pages/weekSta/weekSta',
+        });
+      }
+    },
+    //查看日历数据
+    getCalendarDate:async function() {
       // 隐藏标题
       this.setData({
         isTitle:false,
       });
-      
-      let {weekDataList}=await request('/statistics/week');
-      // this.setData({
-      //   dataList,
-      //   noArriveNum:'0'+noArriveNum,
-      //   leaveNum:'0'+leaveNum,
-      //   totalNum:'0'+totalNum,
-      //   tableColumns
-      // });
-    },
+      // 获取月结果
+      let {monthDataList,checkMount,noArriveNumMount,leaveNumMount}=await request('/statistics/week');
+      // 补0
+      let totalNum=checkMount < 9 ? '0' + checkMount : checkMount;
+      let noArriveNum=noArriveNumMount < 9 ? '0' + noArriveNumMount : noArriveNumMount;
+      let leaveNum= leaveNumMount < 9 ? '0' + leaveNumMount : leaveNumMount;
+      this.setData({
+        // dataList:dataList,
+        noArriveNum,
+        leaveNum,
+        totalNum,
+        // checkTimes:checkTimes,
+        tableTitle:'该日数据',
+        // tableColumns,
+      });
+    }
+
   },
   // 组件生命周期
   lifetimes: {
@@ -166,6 +302,9 @@ Component({
         case 'person'://个人
           this.getPersonDate();
           break;
+        case 'calendar'://日历
+          this.getCalendarDate();
+          break;
         default:
           break;
       };
@@ -173,7 +312,6 @@ Component({
     },
     detached: function() {
       // 在组件实例被从页面节点树移除时执行
-
     },
   },
 })

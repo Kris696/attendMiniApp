@@ -37,3 +37,18 @@ border-bottom:2rpx solid #DDDDDD;
 .table-header .tr .th.select{width:60rpx;padding:0 1rpx}
 .scroll-view{overflow:hidden;white-space:nowrap}
 .scroll-view .table-content{display:inline-block;min-width:100%}
+
+
+.noArr{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: #ff0000;
+}
+
+.callSick{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: #f48924;
+}

@@ -9,6 +9,6 @@ _vibrate="{{_vibrate}}"
 <statisticsResult 
 isPrint="{{isPrint}}"
 pageUrl="/pages/statisticsIndex/statisticsIndex"
-tableData="week"
+tableData="calendar"
 ></statisticsResult>
 
