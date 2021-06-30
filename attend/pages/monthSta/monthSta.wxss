@@ -1,1 +1,6 @@
 /* pages/monthSta/monthSta.wxss */
+.text{
+  height: 1000rpx;
+  line-height: 1000rpx;
+  text-align: center;
+}

@@ -5,7 +5,7 @@ let { weekDate, monthDate } = require('../util/weekAndMonthDate');
 // 获取每天统计数据
 const { getDayDate } = require('../controllers/getDayDate');
 
-module.exports = async(req, res) => {
+async function getWeekDate() {
     let checkMount = 0; //一周点到次数
     let noArriveNumMount = 0; //一周未到人次
     let leaveNumMount = 0; //一周请假人次
@@ -24,10 +24,12 @@ module.exports = async(req, res) => {
         leaveNumMount += ele.leaveNum;
     });
 
-    res.send({
+    return {
         weekDataList: weekDataList,
         checkMount: checkMount,
         noArriveNumMount: noArriveNumMount,
         leaveNumMount: leaveNumMount,
-    });
+    };
 };
+
+module.exports = { getWeekDate };

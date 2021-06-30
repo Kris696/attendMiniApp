@@ -14,11 +14,12 @@ statistics.get('/now', require('../controllers/getNowData'));
 // 获取今日点到结果
 statistics.get('/today', require('../model/getTodayData'));
 // 获取本周点到结果
-statistics.get('/week', require('../model/getWeekData'));
+statistics.get('/week', require('../routes/statistics/getWeekDate'));
 // 获取本月点到结果
 statistics.get('/month', require('../model/getMonthData'));
 // 下载一周点到结果
 statistics.get('/weekDateDownload', require('../model/weekDateDownload'));
-
+// 下载一周点到结果
+statistics.get('/download', require('../model/download'));
 
 module.exports = statistics;

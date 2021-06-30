@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/calendarSta/calendarSta",
     "pages/weekSta/weekSta",
     "pages/statisticsIndex/statisticsIndex",
+    "pages/calendarSta/calendarSta",
     "pages/daySta/daySta",
     "pages/staResult/staResult",
     "pages/rollCall/rollCall",

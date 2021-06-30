@@ -66,6 +66,7 @@ Component({
     getNowDate:async function(){
       let {dataList,noArriveNum,leaveNum}=await request('/statistics/now');
       this.setData({
+        tableData:this.data.tableData,
         dataList,
         noArriveNum:'0'+noArriveNum,
         leaveNum:'0'+leaveNum
@@ -261,6 +262,7 @@ Component({
       // 隐藏标题
       this.setData({
         isTitle:false,
+        tableData:this.data.tableData,
       });
       // 获取月结果
       let {monthDataList,checkMount,noArriveNumMount,leaveNumMount}=await request('/statistics/week');
@@ -277,7 +279,55 @@ Component({
         tableTitle:'该日数据',
         // tableColumns,
       });
-    }
+    },
+    // 打印周结果
+    printRes:async function () {
+      // 生成excel表格
+      request('/statistics/weekDateDownload').then((result)=>{
+        wx.showLoading({
+          title: '资源加载中...',
+        });
+        wx.downloadFile({
+          // url: 'http://w4v0779438.wicp.vip/statistics/download',
+          // url: 'http://localhost:3000/statistics/download',
+          success:  (res)=> {
+            const tempFilePath = res.tempFilePath;
+            // 保存文件
+            wx.saveFile({
+              tempFilePath,
+              success:  (res) =>{
+                const savedFilePath = res.savedFilePath;
+                wx.showToast({
+                  title: '文件加载成功',
+                  icon: '',     //默认值是success,就算没有icon这个值，就算有其他值最终也显示success
+                  duration: 2000,      //停留时间
+                });
+                wx.redirectTo({
+                  url: '/pages/index/index',
+                });
+                // 打开文件
+                wx.openDocument({
+                  filePath: savedFilePath,
+                  success:  (res)=> {
+                    console.log('openDocument');
+                    console.log('打开文档成功');
+                  },
+                  err:(err)=>{
+                    console.log('打开文档失败',err);
+                  }
+                });
+              },
+              fail:  (err)=> {
+                console.log('保存失败：', err)
+              }
+            });
+          },
+          fail:  (err)=> {
+            console.log('下载失败：', err);
+          },
+        });
+      });
+    },
 
   },
   // 组件生命周期
