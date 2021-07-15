@@ -1,7 +1,7 @@
 var express = require('express');
 // 整合点到功能路由
 var check = express.Router();
-
+// 测试修改仓库
 
 check.get('/', require('../controllers/getCheckInfo'));
 
