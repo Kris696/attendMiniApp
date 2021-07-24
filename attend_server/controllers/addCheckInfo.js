@@ -31,7 +31,7 @@ module.exports = async(req, res) => {
                 await Checkinfo.create({
                     checkDate: checkDate,
                     checkTime: checkTime,
-                    status: 1, //0：未到     1：已到     2：请假
+                    status: 1, //0：未到     1：已到     2：请假    4：不需参与点到
                     check_id: item.id,
                     teacherName: item.teacherName,
                     icon: 'icon-check-circle-fill',

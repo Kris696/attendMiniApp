@@ -6,12 +6,18 @@ async function getDayDate(date) {
     let dataList = [];
     // 点到次数
     let totalNum = 0;
-    //都没有：0        早上点到：1       下午点到：2     都点到：3
+    //点到情况 都没有：0        早上点到：1       下午点到：2     都点到：3
     let checkTimes = 0;
     // 早上数据
     let morningDate = [];
     // 下午数据
     let afternoonDate = [];
+    // 未到人数
+    let noArriveNum = 0;
+    // 请假人数
+    let leaveNum = 0;
+    // 未点到人员
+    let noCheckPerson = [];
 
     // 点到次数
     // 今天早上
@@ -30,53 +36,122 @@ async function getDayDate(date) {
         }
     });
 
+    // 点到情况
     checkTimes = morning != null && afternoon != null ? 3 : morning == null && afternoon == null ? 0 : morning != null ? 1 : 2;
+    // 点到次数
     totalNum = morning != null && afternoon != null ? 2 : morning == null && afternoon == null ? 0 : 1;
 
-    // 未到人员 0
-    let noArrivePerson = await Checkinfo.findAll({
-        where: {
-            checkDate: date,
-            status: 0
-        }
-    });
+    // 如果只有上午或下午点到
+    if (checkTimes == 1 || checkTimes == 2) {
+        // 未参与点到人员
+        let todayPerson = await Checkinfo.findAll({
+            where: {
+                checkDate: date,
+            }
+        });
 
-    // 未到人数
-    let noArriveNum = noArrivePerson.length;
+        let allPerson = await Classinfo.findAll();
 
-    // 请假人员 2
-    let leavePerson = await Checkinfo.findAll({
-        where: {
-            checkDate: date,
-            status: 2
-        }
-    });
+        /* allPerson.forEach(item => {
+            // console.log('111', item);
+            if (!todayPerson.includes(item)) {
+                noCheckPerson.push(item);
+            }
+        }); */
 
-    // 请假人数
-    let leaveNum = leavePerson.length;
+        // 过滤标识
+        // let teaName = 
 
-    // 添加未到数据至数组
-    noArrivePerson.forEach((ele, index) => {
-        let data = {
-            teacherName: ele.teacherName,
-            noArriveTimes: 1,
-            leaveTimes: 0
-        }
-        dataList.push(data);
-    });
+        // ==================================================
 
-    // 添加请假数据至数组
-    leavePerson.forEach((ele, index) => {
-        let data = {
-            teacherName: ele.teacherName,
-            noArriveTimes: 0,
-            leaveTimes: 1
-        }
-        dataList.push(data);
-    });
+        // 未到人员 0
+        let noArrivePerson = await Checkinfo.findAll({
+            where: {
+                checkDate: date,
+                status: 0
+            }
+        });
+
+        // 未到人数
+        noArriveNum = noArrivePerson.length;
+
+        // 请假人员 2
+        let leavePerson = await Checkinfo.findAll({
+            where: {
+                checkDate: date,
+                status: 2
+            }
+        });
+
+        // 请假人数
+        leaveNum = leavePerson.length;
+
+        // 添加未到数据至数组
+        noArrivePerson.forEach((ele, index) => {
+            let data = {
+                teacherName: ele.teacherName,
+                noArriveTimes: 1,
+                leaveTimes: 0
+            }
+            dataList.push(data);
+        });
+
+        // 添加请假数据至数组
+        leavePerson.forEach((ele, index) => {
+            let data = {
+                teacherName: ele.teacherName,
+                noArriveTimes: 0,
+                leaveTimes: 1
+            }
+            dataList.push(data);
+        });
+    }
 
     // 如果上下午都有点到，再分别返回上下午数据
     if (checkTimes == 3) {
+        // 未点到人员
+        let allPerson = await Classinfo.findAll(); //所有老师
+
+        //早上未点到人员数据
+        let noMorCheckPerson = [];
+
+        let todayMorPerson = await Checkinfo.findAll({ //早上点到人员数据
+            where: {
+                checkDate: date,
+                checkTime: 0,
+            }
+        });
+
+        // 添加早上未点到人员数据
+        allPerson.forEach(item => {
+            // console.log(item);
+            if (!todayMorPerson.includes(item)) {
+                noMorCheckPerson.push(item);
+            }
+        });
+
+        //下午未点到人员数据
+        let noAfternoonCheckPerson = [];
+
+        let todayAfternoonPerson = await Checkinfo.findAll({ //下午点到人员数据
+            where: {
+                checkDate: date,
+                checkTime: 1,
+            }
+        });
+
+        // 添加下午未点到人员数据
+        allPerson.forEach(item => {
+            // console.log(item);
+            if (!todayAfternoonPerson.includes(item)) {
+                noAfternoonCheckPerson.push(item);
+            }
+        });
+
+        noCheckPerson.push(noMorCheckPerson);
+        noCheckPerson.push(noAfternoonCheckPerson);
+
+        // ================================================================
         // 早上未到人员 0
         let MorningNoArrivePerson = await Checkinfo.findAll({
             where: {
@@ -198,6 +273,7 @@ async function getDayDate(date) {
         leaveNum,
         totalNum,
         checkTimes,
+        noCheckPerson,
         morningDate,
         afternoonDate
     }

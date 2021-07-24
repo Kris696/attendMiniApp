@@ -16,7 +16,7 @@ function formatDate(date) { 
     return (myyear + "-" + mymonth + "-" + myweekday); 
 }
 
-var now = new Date('2021/06/22'); //当前日期 
+var now = new Date(); //当前日期 
 var nowDayOfWeek = now.getDay(); //今天本周的第几天 
 var nowDay = now.getDate(); //当前日 
 var nowMonth = now.getMonth(); //当前月 

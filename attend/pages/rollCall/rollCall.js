@@ -11,6 +11,8 @@ Page({
     checkinfo:[],//今时今日点到信息
     page:1,//页数
     total:0,//总页数
+    time:[],//时间
+    morOrAfter:0,//上午或下午
   },
 
   /**
@@ -18,11 +20,19 @@ Page({
    */
   onLoad: function (options) {
     // 获取当前时间
-    var time = util.formatTime(new Date());
+    let time = util.formatTime(new Date());
+    let morOrAfter=time[1].substr(0,2);
     this.setData({
-      time: time
+      time,
+      morOrAfter
     });
-    
+
+    // request('/check/addClassinfo').then(()=>{
+    //   request('/check/addCheckInfo').then(()=>{
+    //     this.getCheckInfo();
+    //   })
+    // });
+
     //发送请求,解析页面数据
     this.addClassinfo();
     //发送请求,添加点到信息

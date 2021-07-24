@@ -10,8 +10,7 @@
     "pages/check/check",
     "pages/login/login",
     "pages/monthSta/monthSta",
-    "pages/personSta/personSta",
-    "pages/demo/demo"
+    "pages/personSta/personSta"
   ],
   "window": {
     "backgroundTextStyle": "light",

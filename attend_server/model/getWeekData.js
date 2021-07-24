@@ -4,7 +4,6 @@ const { checkTime, checkDate } = require('../util/getdate');
 let { weekDate, monthDate } = require('../util/weekAndMonthDate');
 // 获取每天统计数据
 const { getDayDate } = require('../controllers/getDayDate');
-
 async function getWeekDate() {
     let checkMount = 0; //一周点到次数
     let noArriveNumMount = 0; //一周未到人次

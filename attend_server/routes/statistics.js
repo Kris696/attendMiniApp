@@ -17,9 +17,12 @@ statistics.get('/today', require('../model/getTodayData'));
 statistics.get('/week', require('../routes/statistics/getWeekDate'));
 // 获取本月点到结果
 statistics.get('/month', require('../model/getMonthData'));
-// 下载一周点到结果
+// 生成一周点到结果数据
 statistics.get('/weekDateDownload', require('../model/weekDateDownload'));
 // 下载一周点到结果
 statistics.get('/download', require('../model/download'));
+// ====================================================================
+// 测试
+statistics.get('/demo', require('../model/demo'));
 
 module.exports = statistics;

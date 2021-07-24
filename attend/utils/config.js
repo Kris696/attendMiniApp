@@ -1,5 +1,5 @@
 // 配置服务器相关信息
 export default {
   host:'http://localhost:3000',
-  mobileHost:'http://w4v0779438.wicp.vip'
+  mobileHost:'https://40779w43f8.picp.vip'
 }

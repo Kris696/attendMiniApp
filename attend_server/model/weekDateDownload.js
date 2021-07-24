@@ -1,3 +1,5 @@
+// 写入本地excel表格
+
 // excel依赖
 const xlsx = require('node-xlsx');
 // 文件依赖
@@ -170,7 +172,7 @@ module.exports = (req, res) => {
         });
 
         // 生成二进制数据流
-        let buffer = xlsx.build([{ name: "周点到数据", data: result }], options);
+        let buffer = xlsx.build([{ name: "本周点到数据", data: result }], options);
         // 写入文件
         fs.writeFile('./data.xlsx', buffer, (err) => {
             if (err) {

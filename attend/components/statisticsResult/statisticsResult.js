@@ -288,7 +288,7 @@ Component({
           title: '资源加载中...',
         });
         wx.downloadFile({
-          // url: 'http://w4v0779438.wicp.vip/statistics/download',
+          url: 'http://w4v0779438.wicp.vip/statistics/download',
           // url: 'http://localhost:3000/statistics/download',
           success:  (res)=> {
             const tempFilePath = res.tempFilePath;
