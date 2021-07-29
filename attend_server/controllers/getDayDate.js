@@ -43,24 +43,31 @@ async function getDayDate(date) {
 
     // 如果只有上午或下午点到
     if (checkTimes == 1 || checkTimes == 2) {
-        // 未参与点到人员
+        //参与点到人员
         let todayPerson = await Checkinfo.findAll({
             where: {
                 checkDate: date,
             }
         });
 
+        // 所有老师
         let allPerson = await Classinfo.findAll();
 
-        /* allPerson.forEach(item => {
-            // console.log('111', item);
-            if (!todayPerson.includes(item)) {
-                noCheckPerson.push(item);
+        // 未参与点到人员   noCheckPerson
+        let i = 0;
+        let j = 0;
+        let index = 0;
+        for (i = 0; i < allPerson.length; i++) {
+            for (j = 0; j < todayPerson.length; j++) {
+                if (allPerson[i].teacherName != todayPerson[j].teacherName) {
+                    index++;
+                }
             }
-        }); */
-
-        // 过滤标识
-        // let teaName = 
+            if (index == todayPerson.length) {
+                noCheckPerson.push(allPerson[i]);
+            }
+            index = 0;
+        }
 
         // ==================================================
 
@@ -109,47 +116,57 @@ async function getDayDate(date) {
 
     // 如果上下午都有点到，再分别返回上下午数据
     if (checkTimes == 3) {
-        // 未点到人员
-        let allPerson = await Classinfo.findAll(); //所有老师
+        // 所有老师
+        let allPerson = await Classinfo.findAll();
 
-        //早上未点到人员数据
-        let noMorCheckPerson = [];
-
-        let todayMorPerson = await Checkinfo.findAll({ //早上点到人员数据
+        //早上参与点到人员
+        let todayMorPerson = await Checkinfo.findAll({
             where: {
                 checkDate: date,
-                checkTime: 0,
+                checkTime: 0
             }
         });
 
-        // 添加早上未点到人员数据
-        allPerson.forEach(item => {
-            // console.log(item);
-            if (!todayMorPerson.includes(item)) {
-                noMorCheckPerson.push(item);
+        // 早上未参与点到人员   noCheckPerson
+        let i = 0;
+        let j = 0;
+        let index = 0;
+        for (i = 0; i < allPerson.length; i++) {
+            for (j = 0; j < todayMorPerson.length; j++) {
+                if (allPerson[i].teacherName != todayMorPerson[j].teacherName) {
+                    index++;
+                }
             }
-        });
+            if (index == todayMorPerson.length) {
+                noCheckPerson.morning.push(allPerson[i]);
+            }
+            index = 0;
+        }
 
-        //下午未点到人员数据
-        let noAfternoonCheckPerson = [];
-
-        let todayAfternoonPerson = await Checkinfo.findAll({ //下午点到人员数据
+        // =============================================================
+        //下午参与点到人员
+        let todayAfterPerson = await Checkinfo.findAll({
             where: {
                 checkDate: date,
-                checkTime: 1,
+                checkTime: 1
             }
         });
 
-        // 添加下午未点到人员数据
-        allPerson.forEach(item => {
-            // console.log(item);
-            if (!todayAfternoonPerson.includes(item)) {
-                noAfternoonCheckPerson.push(item);
+        // 早上未参与点到人员   noCheckPerson
+        let m = 0;
+        let n = 0;
+        let num = 0;
+        for (m = 0; m < allPerson.length; m++) {
+            for (n = 0; n < todayAfterPerson.length; n++) {
+                if (allPerson[m].teacherName != todayAfterPerson[n].teacherName) {
+                    num++;
+                }
             }
-        });
-
-        noCheckPerson.push(noMorCheckPerson);
-        noCheckPerson.push(noAfternoonCheckPerson);
+            if (num == todayAfterPerson.length) {
+                noCheckPerson.afternoon.push(allPerson[m]);
+            }
+            num = 0;
+        }
 
         // ================================================================
         // 早上未到人员 0

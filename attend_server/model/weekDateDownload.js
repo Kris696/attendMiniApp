@@ -46,59 +46,89 @@ async function addContent() {
     // 添加点到数据  上午：2n+1  下午： (n+1)*2
     weekDataList.forEach((ele, index) => { //周几 
         if (ele.checkTimes == 1) { // 只上午
-            // console.log('上午');
             if (ele.dataList.length != 0) { //有未到或请假
                 for (let i = 2; i < data.length; i++) { //所有老师
-                    for (let j = 0; j < ele.dataList.length; j++) { //迟到或未到的老师
-                        if (data[i][0] == ele.dataList[j].teacherName) { //查找相同                    
-                            if (ele.dataList[j].noArriveTimes == 1) { //未到
-                                data[i][2 * index + 1] = '未到';
-                                data[i][(index + 1) * 2] = '';
-                                break;
-                            } else if (ele.dataList[j].leaveTimes == 1) { //请假
-                                data[i][2 * index + 1] = '请假';
-                                data[i][(index + 1) * 2] = '';
-                                break
+                    for (let j = 0; j < ele.noCheckPerson.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson[j].teacherName) { //如果有不需参与点到人员
+                            data[i][2 * index + 1] = '';
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else { //参与点到的人员
+                            for (let j = 0; j < ele.dataList.length; j++) { //迟到或未到的老师
+                                if (data[i][0] == ele.dataList[j].teacherName) { //查找相同                    
+                                    if (ele.dataList[j].noArriveTimes == 1) { //未到
+                                        data[i][2 * index + 1] = '未到';
+                                        data[i][(index + 1) * 2] = '';
+                                        break;
+                                    } else if (ele.dataList[j].leaveTimes == 1) { //请假
+                                        data[i][2 * index + 1] = '请假';
+                                        data[i][(index + 1) * 2] = '';
+                                        break;
+                                    }
+                                } else { //没有相同
+                                    data[i][2 * index + 1] = '已到'; //上午
+                                    // 下午未检查 为空
+                                    data[i][(index + 1) * 2] = ''; //下午
+                                }
                             }
-                        } else { //没有相同
+                        }
+                    }
+                }
+            } else {
+                for (let i = 2; i < data.length; i++) {
+                    for (let j = 0; j < ele.noCheckPerson.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson[j].teacherName) { //如果有不需参与点到人员
+                            data[i][2 * index + 1] = '';
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else {
                             data[i][2 * index + 1] = '已到';
-                            // 下午未检查 为空
                             data[i][(index + 1) * 2] = '';
                         }
                     }
                 }
-            } else {
-                for (let i = 2; i < data.length; i++) {
-                    data[i][2 * index + 1] = '已到';
-                    data[i][(index + 1) * 2] = '已到';
-                }
             }
         } else if (ele.checkTimes == 2) { // 只下午
-            // console.log('下午');
             if (ele.dataList.length != 0) { //有未到或请假
                 for (let i = 2; i < data.length; i++) { //所有老师
-                    for (let j = 0; j < ele.dataList.length; j++) { //迟到或未到的老师
-                        if (data[i][0] == ele.dataList[j].teacherName) { //查找相同                    
-                            if (ele.dataList[j].noArriveTimes == 1) { //未到
-                                data[i][2 * index + 1] = '';
-                                data[i][(index + 1) * 2] = '未到';
-                                break;
-                            } else if (ele.dataList[j].leaveTimes == 1) { //请假
-                                data[i][2 * index + 1] = '';
-                                data[i][(index + 1) * 2] = '请假';
-                                break
-                            }
-                        } else { //没有相同
-                            // 上午未检查 为空
+                    for (let j = 0; j < ele.noCheckPerson.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson[j].teacherName) { //如果有不需参与点到人员
                             data[i][2 * index + 1] = '';
-                            data[i][(index + 1) * 2] = '已到';
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else { //需要参与点到人员
+                            for (let j = 0; j < ele.dataList.length; j++) { //迟到或未到的老师
+                                if (data[i][0] == ele.dataList[j].teacherName) { //查找相同                    
+                                    if (ele.dataList[j].noArriveTimes == 1) { //未到
+                                        data[i][2 * index + 1] = '';
+                                        data[i][(index + 1) * 2] = '未到';
+                                        break;
+                                    } else if (ele.dataList[j].leaveTimes == 1) { //请假
+                                        data[i][2 * index + 1] = '';
+                                        data[i][(index + 1) * 2] = '请假';
+                                        break;
+                                    }
+                                } else { //没有相同
+                                    // 上午未检查 为空
+                                    data[i][2 * index + 1] = '';
+                                    data[i][(index + 1) * 2] = '已到';
+                                }
+                            }
                         }
                     }
                 }
             } else {
                 for (let i = 2; i < data.length; i++) {
-                    data[i][2 * index + 1] = '已到';
-                    data[i][(index + 1) * 2] = '已到';
+                    for (let j = 0; j < ele.noCheckPerson.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson[j].teacherName) { //如果有不需参与点到人员
+                            data[i][2 * index + 1] = '';
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else {
+                            data[i][2 * index + 1] = '';
+                            data[i][(index + 1) * 2] = '已到';
+                        }
+                    }
                 }
             }
         } else if (ele.checkTimes == 3) { //都有
@@ -106,46 +136,74 @@ async function addContent() {
             // 上午
             if (ele.dataList.length != 0) { //有未到或请假
                 for (let i = 2; i < data.length; i++) { //所有老师
-                    for (let j = 0; j < ele.morningDate.length; j++) { //迟到或未到的老师
-                        if (data[i][0] == ele.morningDate[j].teacherName) { //查找相同                    
-                            if (ele.morningDate[j].noArriveTimes == 1) { //未到
-                                data[i][2 * index + 1] = '未到';
-                                break;
-                            } else if (ele.dataList[j].leaveTimes == 1) { //请假
-                                data[i][2 * index + 1] = '请假';
-                                break
+                    for (let j = 0; j < ele.noCheckPerson.morning.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson.morning[j].teacherName) { //如果有不需参与点到人员
+                            data[i][2 * index + 1] = '';
+                            break;
+                        } else { //需要点到人员
+                            for (let j = 0; j < ele.morningDate.length; j++) { //迟到或未到的老师
+                                if (data[i][0] == ele.morningDate[j].teacherName) { //查找相同                    
+                                    if (ele.morningDate[j].noArriveTimes == 1) { //未到
+                                        data[i][2 * index + 1] = '未到';
+                                        break;
+                                    } else if (ele.dataList[j].leaveTimes == 1) { //请假
+                                        data[i][2 * index + 1] = '请假';
+                                        break
+                                    }
+                                } else { //没有相同
+                                    data[i][2 * index + 1] = '已到';
+                                }
                             }
-                        } else { //没有相同
-                            data[i][2 * index + 1] = '已到';
                         }
                     }
                 }
             } else { //全勤
                 for (let i = 2; i < data.length; i++) {
-                    data[i][2 * index + 1] = '已到';
+                    for (let j = 0; j < ele.noCheckPerson.morning.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson.morning[j].teacherName) { //如果有不需参与点到人员
+                            data[i][2 * index + 1] = '';
+                            break;
+                        } else {
+                            data[i][2 * index + 1] = '已到';
+                        }
+                    }
                 }
             }
             // 下午
             if (ele.dataList.length != 0) { //有未到或请假
                 for (let i = 2; i < data.length; i++) { //所有老师
-                    for (let j = 0; j < ele.afternoonDate.length; j++) { //迟到或未到的老师
-                        if (data[i][0] == ele.afternoonDate[j].teacherName) { //查找相同                    
-                            if (ele.afternoonDate[j].noArriveTimes == 1) { //未到
-                                data[i][(index + 1) * 2] = '未到';
-                                break;
-                            } else if (ele.afternoonDate[j].leaveTimes == 1) { //请假
-                                data[i][(index + 1) * 2] = '请假';
-                                break
+                    for (let j = 0; j < ele.noCheckPerson.afternoon.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson.afternoon[j].teacherName) { //如果有不需参与点到人员
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else { //需要点到人员
+                            for (let j = 0; j < ele.afternoonDate.length; j++) { //迟到或未到的老师
+                                if (data[i][0] == ele.afternoonDate[j].teacherName) { //查找相同                    
+                                    if (ele.afternoonDate[j].noArriveTimes == 1) { //未到
+                                        data[i][(index + 1) * 2] = '未到';
+                                        break;
+                                    } else if (ele.afternoonDate[j].leaveTimes == 1) { //请假
+                                        data[i][(index + 1) * 2] = '请假';
+                                        break
+                                    }
+                                } else { //没有相同
+                                    // 上午未检查 为空
+                                    data[i][(index + 1) * 2] = '已到';
+                                }
                             }
-                        } else { //没有相同
-                            // 上午未检查 为空
-                            data[i][(index + 1) * 2] = '已到';
                         }
                     }
                 }
             } else { //全勤
                 for (let i = 2; i < data.length; i++) {
-                    data[i][(index + 1) * 2] = '已到';
+                    for (let j = 0; j < ele.noCheckPerson.afternoon.length; j++) {
+                        if (data[i][0] == ele.noCheckPerson.afternoon[j].teacherName) { //如果有不需参与点到人员
+                            data[i][(index + 1) * 2] = '';
+                            break;
+                        } else {
+                            data[i][(index + 1) * 2] = '已到';
+                        }
+                    }
                 }
             }
         } else if (ele.checkTimes == 0) { //没有点到
@@ -165,8 +223,8 @@ module.exports = (req, res) => {
         const path = './data.xlsx';
         fs.unlink(path, (err) => {
             if (err) {
-                console.error(err)
-                return
+                console.error(err);
+                return;
             }
             //file removed
         });

@@ -43,7 +43,7 @@ module.exports = (req, res) => {
         }
     });
 
-    let newArr = [..._filterList, ...arrParticipantList]
+    let newArr = [...arrParticipantList, ..._filterList]
 
     res.send(newArr);
 
