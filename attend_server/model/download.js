@@ -6,7 +6,8 @@ const fs = require('fs');
 module.exports = (req, res) => {
     // The must headers.
     res.setHeader('Content-type', 'application/octet-stream');
-    res.setHeader('Content-Disposition', 'attachment;filename=data.xlsx;filename*=UTF-8'); // 'aaa.txt' can be customized.
+    // response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+    res.setHeader('Content-Disposition', 'attachment;filename=data.xlsx'); // 'aaa.txt' can be customized.
     var fileStream = fs.createReadStream('./data.xlsx');
     fileStream.on('data', function(data) {
         res.write(data, 'binary');
